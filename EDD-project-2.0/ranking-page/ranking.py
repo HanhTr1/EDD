@@ -27,9 +27,9 @@ def get_top_players():
     try:
         connection = get_db_connection()
         cursor = connection.cursor(dictionary=True)
-        sql_ranking = f"SELECT ranking, player_name, letter_count  FROM player WHERE result = 'win'  ORDER BY ranking ASC LIMIT 10"
+        sql_ranking = f" SELECT player_name, letter_count FROM player WHERE result = 'win' ORDER BY letter_count DESC LIMIT 10"
         cursor.execute(sql_ranking)
-        top_players = cursor.fetchmany(size=10)
+        top_players = cursor.fetchall()
 
         if top_players:
             cursor.close()
